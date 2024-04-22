@@ -1,0 +1,23 @@
+import os
+# 定义复制源路径及目标路径
+sor_path1 = (input("Enter source path:"))
+tar_path1 = (input("Enter target path:"))
+sor_path = r"{}".format(sor_path1)
+tar_path = r"{}".format(tar_path1)
+# sor_path = r"E:\python\pythonProject\one\p1"
+# tar_path = r"E:\python\pythonProject\one\p2"
+# 定义函数
+def copy(sor_path, tar_path):
+    if not os.path.exists(tar_path):
+        os.makedirs(tar_path)
+    for files in os.listdir(sor_path):
+        if os.path.isdir(os.path.join(sor_path, files)):
+            copy(os.path.join(sor_path, files), os.path.join(tar_path, files))
+        else:
+            path0 = os.path.join(sor_path, files)
+            with open(path0, "rb") as pip_line:
+                red_container = pip_line.read()
+                path1 = os.path.join(tar_path, files)
+                with open(path1, "wb") as pip1_line:
+                    pip1_line.write(red_container)
+copy(sor_path, tar_path)
